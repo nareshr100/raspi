@@ -1,21 +1,21 @@
 import I2C_LCD_driver
-import board
-import busio
-import adafruit_ahtx0
+# import board
+# import busio
+# import adafruit_ahtx0
 from ADCDevice import *
 from ADC import setup
 from time import sleep, strftime
 from datetime import datetime
 
 statuses = [
-        'working             ',
-        'in a class          ',
-        'in a meeting        ',
-        'in an exam/interview',
-        'relaxing            ',
-        'sleeping            ',
-        'not here but around ',
-        'not home            '
+        'working         ',
+        'in a class      ',
+        'in a meeting    ',
+        'in an exam      ',
+        'not doing much  ',
+        'sleeping        ',
+        'not here but abo',
+        'out and about   '
         ]
 
 #  Setup LCDs
@@ -23,8 +23,8 @@ mylcd1 = I2C_LCD_driver.lcd(0x27)
 mylcd2 = I2C_LCD_driver.lcd(0x26)
 
 # Create library object using our Bus I2C port
-i2c = busio.I2C(board.SCL, board.SDA)
-sensor = adafruit_ahtx0.AHTx0(i2c)
+# i2c = busio.I2C(board.SCL, board.SDA)
+# sensor = adafruit_ahtx0.AHTx0(i2c)
 
 #  setup ADC
 adc = ADCDevice()
@@ -75,8 +75,8 @@ mylcd2.backlight(1)
 
 mylcd1.lcd_clear()
 mylcd2.lcd_clear()
-mylcd1.lcd_display_string("Naresh's Status:", 1)
-mylcd2.lcd_display_string("Naresh's Status:", 1)
+mylcd1.lcd_display_string("Naresh is:", 1)
+mylcd2.lcd_display_string("Naresh is:", 1)
 
 i = 0
 
@@ -90,7 +90,7 @@ while True:
     mylcd1.lcd_display_string(status, 2)
     mylcd2.lcd_display_string(status, 2)
     
-    if i == 0:
+    '''if i == 0:
         # Read Temperature and Humidity
         tmp = "Tmp %0.1f C" % sensor.temperature
         hmd = "Hmd %0.1f %%" % sensor.relative_humidity
@@ -99,7 +99,7 @@ while True:
         # Display info
         mylcd1.lcd_display_string(tmp, 3)
         mylcd1.lcd_display_string(hmd, 4)
-        mylcd1.lcd_display_string(cpu_tmp, 3, 13)
+        mylcd1.lcd_display_string(cpu_tmp, 3, 13)'''
     
     mylcd1.lcd_display_string(t_string, 4, 15)
     
